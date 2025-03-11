@@ -33,7 +33,6 @@ const Watchlist = ({
       };
       let res = await vy.searchScript(data);
       if (res.stat === "Ok") {
-        console.log(res);
         setSearchResult(res.values);
       } else {
         toast({
@@ -49,7 +48,7 @@ const Watchlist = ({
   }, [stext]);
 
   return (
-    <div className="w-full md:w-96 space-y-3 pt-4 mt-8 md:mt-0">
+    <div className="w-full flex flex-col md:w-96 space-y-3 pt-4 mt-8 md:mt-0">
       <div className="relative flex gap-2 px-4">
         <div className="relative w-full">
           <Input
@@ -93,9 +92,9 @@ const Watchlist = ({
         onValueChange={(val) => {
           setTabId(val);
         }}
-        className=""
+        className="flex flex-col grow"
       >
-        <div className="h-72 overflow-y-scroll">
+        <div className="grow overflow-y-scroll">
           <TabsContent
             value="1"
             className="flex flex-wrap items-center justify-around gap-3 mt-0"
