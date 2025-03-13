@@ -150,16 +150,16 @@ const Position = ({
       prd: position.prd,
       trantype: parseInt(position.netqty) < 0 ? "B" : "S",
       prctyp: "MKT",
-      prc:
-        parseInt(position.netqty) < 0
-          ? (
-              parseFloat(position.lp) +
-              Math.round((parseFloat(position.lp) * 0.01) / 0.05) * 0.05
-            ).toString()
-          : (
-              parseFloat(position.lp) -
-              Math.round((parseFloat(position.lp) * 0.01) / 0.05) * 0.05
-            ).toString(),
+      prc: "0",
+      // parseInt(position.netqty) < 0
+      //   ? (
+      //       parseFloat(position.lp) +
+      //       Math.round((parseFloat(position.lp) * 0.01) / 0.05) * 0.05
+      //     ).toFixed(2)
+      //   : (
+      //       parseFloat(position.lp) -
+      //       Math.round((parseFloat(position.lp) * 0.01) / 0.05) * 0.05
+      //     ).toFixed(2),
     };
     const validData = OrderShema.safeParse(data);
     if (!validData.success) {
@@ -255,12 +255,22 @@ const Position = ({
   return parseInt(position.netqty) !== 0 ? (
     <div className="flex justify-between items-center text-xs md:text-sm border-y px-2 gap-4 mt-1 p-1">
       <div className="w-full flex flex-col lg:flex-row gap-2 justify-between items-center">
-        <div className="w-full flex text-xs justify-start gap-2">
+        <div className="w-full flex text-xs justify-between md:justify-start items-center gap-2">
           <span>{position.tsym}</span>
           <span>
             Qty:{position.netqty} | AP:{position.netavgprc} | LP:
             {position.lp}
           </span>
+          <Button
+            onClick={() => {
+              handleClosePosition(position.netqty);
+            }}
+            variant="outline"
+            size="sm"
+            className="h-4 p-2 flex md:hidden"
+          >
+            <XMarkIcon className="size-4" />
+          </Button>
         </div>
         <div className="w-full flex justify-between items-center lg:justify-end gap-4">
           <div className="relative flex text-xs items-center gap-2">
@@ -377,15 +387,15 @@ const Position = ({
           )}
         </div>
       </div>
-      <div className="flex flex-col md:flex-row items-center justify-center gap-2">
-        <div className="text-xs">
+      <div className="hidden  md:flex flex-col md:flex-row items-center justify-center gap-2">
+        {/* <div className="text-xs">
           {(
             parseFloat(position.netqty) *
               (parseFloat(position.lp) - parseFloat(position.netavgprc)) *
               parseFloat(position.prcftr) +
             parseFloat(position.rpnl)
           ).toFixed(2)}
-        </div>
+        </div> */}
         <Button
           onClick={() => {
             handleClosePosition(position.netqty);

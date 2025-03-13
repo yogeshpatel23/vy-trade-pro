@@ -180,7 +180,6 @@ const Terminal = ({ account, wsurl }: { account: IAccount; wsurl: string }) => {
               console.log(data);
             }
             // audioPlayer.current?.play();
-            console.log("position uptat4");
             getPositions();
             break;
           case "Rejected":
@@ -257,7 +256,7 @@ const Terminal = ({ account, wsurl }: { account: IAccount; wsurl: string }) => {
     dispatch(addToWatchlist({ script, tabId }));
   }
   return (
-    <div className="flex flex-col md:flex-row min-h-screen">
+    <div className="flex flex-col md:flex-row min-h-screen py-4 px-2">
       <div className="fixed flex gap-2 top-2 right-2 p-1 z-10">
         <Link href="/dashboard">
           <HomeIcon className="size-7 cursor-pointer rounded-full border border-white/50 p-1 hover:animate-pulse" />
