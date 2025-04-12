@@ -111,11 +111,16 @@ const Terminal = ({ account, wsurl }: { account: IAccount; wsurl: string }) => {
       if (responses[1].status === "fulfilled") {
         if (responses[1].value) {
           responses[1].value.forEach((p) => {
-            tokens.push(`${p.exch}|${p.token}`);
+            `${p.exch}|${p.token}`;
           });
         }
       }
 
+      watchlist.forEach((list: Script[]) => {
+        list.forEach((sym: Script) => {
+          tokens.push(`${sym.exch}|${sym.token}`);
+        });
+      });
       console.log(tokens);
       ws.current?.send(
         JSON.stringify({
